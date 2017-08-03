@@ -1,6 +1,5 @@
 logs
 target
-/.idea
 /.idea_modules
 /.classpath
 /.project
@@ -8,3 +7,4 @@ target
 /RUNNING_PID
 
 /.vscode
+.idea/workspace.xml
