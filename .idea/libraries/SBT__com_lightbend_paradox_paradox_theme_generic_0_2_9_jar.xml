@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: com.lightbend.paradox:paradox-theme-generic:0.2.9:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.lightbend.paradox/paradox-theme-generic/jars/paradox-theme-generic-0.2.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.lightbend.paradox/paradox-theme-generic/srcs/paradox-theme-generic-0.2.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
