@@ -1,12 +1,9 @@
 package v1.bank
 
 import javax.inject.{Inject, Provider}
-
 import play.api.MarkerContext
-
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.json._
-import scala.util.{Success, Failure}
 
 /**
   * DTO for displaying bank information.

@@ -1,7 +1,6 @@
 package v1.bank
 
 import javax.inject.{Inject, Singleton}
-
 import akka.actor.ActorSystem
 import play.api.libs.concurrent.CustomExecutionContext
 import play.api.{Logger, MarkerContext}

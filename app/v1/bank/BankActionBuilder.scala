@@ -1,13 +1,11 @@
 package v1.bank
 
 import javax.inject.Inject
-
 import net.logstash.logback.marker.LogstashMarker
 import play.api.{Logger, MarkerContext}
 import play.api.http.{FileMimeTypes, HttpVerbs}
 import play.api.i18n.{Langs, MessagesApi}
 import play.api.mvc._
-
 import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
 
