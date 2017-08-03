@@ -5,7 +5,6 @@ import javax.inject.{Inject, Singleton}
 import akka.actor.ActorSystem
 import play.api.libs.concurrent.CustomExecutionContext
 import play.api.{Logger, MarkerContext}
-
 import scala.concurrent.Future
 
 final case class BankData(id: BankId, name: String, host: String)
@@ -28,7 +27,7 @@ class BankExecutionContext @Inject()(actorSystem: ActorSystem) extends CustomExe
   * A pure non-blocking interface for the BankRepository.
   */
 trait BankRepository {
-  def count()(implicit mc: MarkerContext): Int
+  def nextId()(implicit mc: MarkerContext): Int
 
   def create(data: BankData)(implicit mc: MarkerContext): Future[BankId]
 
@@ -49,16 +48,10 @@ class BankRepositoryImpl @Inject()()(implicit ec: BankExecutionContext) extends 
 
   private val logger = Logger(this.getClass)
 
-  private var bankList = List(
-    BankData(BankId("1"), "Bradesco", "192.168.10.1"),
-    BankData(BankId("2"), "Santander", "192.168.10.2"),
-    BankData(BankId("3"), "Itau", "192.168.10.3"),
-    BankData(BankId("4"), "Banco do Brasil", "192.168.10.4"),
-    BankData(BankId("5"), "Safra", "192.168.10.5")
-  )
+  private var bankList: List[BankData] = List()
 
-  def count()(implicit mc: MarkerContext): Int = {
-      bankList.length
+  def nextId()(implicit mc: MarkerContext): Int = {
+    bankList.length + 1
   }
 
   override def list()(implicit mc: MarkerContext): Future[Iterable[BankData]] = {

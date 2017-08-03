@@ -6,6 +6,7 @@ import play.api.MarkerContext
 
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.json._
+import scala.util.{Success, Failure}
 
 /**
   * DTO for displaying bank information.
@@ -37,9 +38,8 @@ class BankResourceHandler @Inject()(
     bankRepository: BankRepository)(implicit ec: ExecutionContext) {
 
   def create(bankInput: BankFormInput)(implicit mc: MarkerContext): Future[BankResource] = {
-    val id = bankRepository.count() + 1
-    val data = BankData(BankId(id.toString), bankInput.name, bankInput.host)
-    // We don't actually create the bank, so return what we have
+    val nextId = bankRepository.nextId()
+    val data = BankData(BankId(nextId.toString), bankInput.name, bankInput.host)
     bankRepository.create(data).map { id =>
       createBankResource(data)
     }
