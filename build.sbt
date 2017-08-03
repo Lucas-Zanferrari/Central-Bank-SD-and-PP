@@ -1,17 +1,35 @@
-name := "Central_Bank_SD_and_PP"
- 
-version := "1.0" 
-      
-lazy val `central_bank_sd_and_pp` = (project in file(".")).enablePlugins(PlayScala)
+import sbt.Keys._
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
-      
-resolvers += "Akka Snapshot Repository" at "http://repo.akka.io/snapshots/"
-      
-scalaVersion := "2.12.2"
+lazy val GatlingTest = config("gatling") extend Test
 
-libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
+// This must be set to 2.11.11 because Gatling does not run on 2.12.2
+scalaVersion in ThisBuild := "2.11.11"
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+libraryDependencies += guice
+libraryDependencies += "org.joda" % "joda-convert" % "1.8"
+libraryDependencies += "net.logstash.logback" % "logstash-logback-encoder" % "4.9"
 
-      
+libraryDependencies += "com.netaporter" %% "scala-uri" % "0.4.16"
+libraryDependencies += "net.codingwell" %% "scala-guice" % "4.1.0"
+
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0-M3" % Test
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % Test
+libraryDependencies += "io.gatling" % "gatling-test-framework" % "2.2.2" % Test
+
+// The Play project itself
+lazy val root = (project in file("."))
+  .enablePlugins(Common, PlayScala, GatlingPlugin)
+  .configs(GatlingTest)
+  .settings(inConfig(GatlingTest)(Defaults.testSettings): _*)
+  .settings(
+    name := """play-scala-rest-api-example""",
+    scalaSource in GatlingTest := baseDirectory.value / "/gatling/simulation"
+  )
+
+// Documentation for this project:
+//    sbt "project docs" "~ paradox"
+//    open docs/target/paradox/site/index.html
+lazy val docs = (project in file("docs")).enablePlugins(ParadoxPlugin).
+  settings(
+    paradoxProperties += ("download_url" -> "https://example.lightbend.com/v1/download/play-rest-api")
+  )

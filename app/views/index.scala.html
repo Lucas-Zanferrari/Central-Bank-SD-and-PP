@@ -1,20 +1,26 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@()
+<!doctype html>
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Banco Central</title>
+  </head>
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "scala")
+  <body>
+    <h1>Banco Central</h1>
 
-}
+    <p>
+      Aqui se encontra a aplicação do Banco Central. Ela funciona com um
+      servidor de nomes para possibilitar as transações entre os banco genéricos (Itaú, Santander, Bradesco etc).
+    </p>
+
+    <p>
+      Obtenha a lista de bancos cadastrados em formato JSON clicando no link abaixo.
+    </p>
+
+    <ul>
+      <li><a href="/v1/banks">/v1/banks</a></li>
+    </ul>
+  </body>
+</html>

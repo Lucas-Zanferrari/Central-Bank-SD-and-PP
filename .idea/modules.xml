@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IdeaProjects-central_bank_sd_and_pp.iml" filepath="$PROJECT_DIR$/.idea/modules/IdeaProjects-central_bank_sd_and_pp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/central_bank_sd_and_pp.iml" filepath="$PROJECT_DIR$/.idea/modules/central_bank_sd_and_pp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/central_bank_sd_and_pp-build.iml" filepath="$PROJECT_DIR$/.idea/modules/central_bank_sd_and_pp-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docs.iml" filepath="$PROJECT_DIR$/.idea/modules/docs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docs-build.iml" filepath="$PROJECT_DIR$/.idea/modules/docs-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root.iml" filepath="$PROJECT_DIR$/.idea/modules/root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/root-build.iml" />
     </modules>
   </component>
 </project>
