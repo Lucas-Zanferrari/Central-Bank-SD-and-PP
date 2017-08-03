@@ -6,5 +6,5 @@ target
 /.settings
 /RUNNING_PID
 
-/.vscode
+/.vscodes
 .idea/workspace.xml
