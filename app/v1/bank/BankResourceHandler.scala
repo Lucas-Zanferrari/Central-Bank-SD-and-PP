@@ -10,7 +10,7 @@ import play.api.libs.json._
 /**
   * DTO for displaying bank information.
   */
-case class BankResource(id: String, link: String, name: String, location: String)
+case class BankResource(id: String, link: String, name: String, host: String)
 
 object BankResource {
 
@@ -23,7 +23,7 @@ object BankResource {
         "id" -> bank.id,
         "link" -> bank.link,
         "name" -> bank.name,
-        "location" -> bank.location
+        "host" -> bank.host
       )
     }
   }
@@ -37,7 +37,8 @@ class BankResourceHandler @Inject()(
     bankRepository: BankRepository)(implicit ec: ExecutionContext) {
 
   def create(bankInput: BankFormInput)(implicit mc: MarkerContext): Future[BankResource] = {
-    val data = BankData(BankId("999"), bankInput.name, bankInput.location)
+    val id = bankRepository.count() + 1
+    val data = BankData(BankId(id.toString), bankInput.name, bankInput.host)
     // We don't actually create the bank, so return what we have
     bankRepository.create(data).map { id =>
       createBankResource(data)
@@ -60,7 +61,7 @@ class BankResourceHandler @Inject()(
   }
 
   private def createBankResource(b: BankData): BankResource = {
-    BankResource(b.id.toString, routerProvider.get.link(b.id), b.name, b.location)
+    BankResource(b.id.toString, routerProvider.get.link(b.id), b.name, b.host)
   }
 
 }

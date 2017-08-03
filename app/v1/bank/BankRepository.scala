@@ -8,7 +8,7 @@ import play.api.{Logger, MarkerContext}
 
 import scala.concurrent.Future
 
-final case class BankData(id: BankId, name: String, location: String)
+final case class BankData(id: BankId, name: String, host: String)
 
 class BankId private(val underlying: Int) extends AnyVal {
   override def toString: String = underlying.toString
@@ -28,6 +28,8 @@ class BankExecutionContext @Inject()(actorSystem: ActorSystem) extends CustomExe
   * A pure non-blocking interface for the BankRepository.
   */
 trait BankRepository {
+  def count()(implicit mc: MarkerContext): Int
+
   def create(data: BankData)(implicit mc: MarkerContext): Future[BankId]
 
   def list()(implicit mc: MarkerContext): Future[Iterable[BankData]]
@@ -47,13 +49,17 @@ class BankRepositoryImpl @Inject()()(implicit ec: BankExecutionContext) extends 
 
   private val logger = Logger(this.getClass)
 
-  private val bankList = List(
+  private var bankList = List(
     BankData(BankId("1"), "Bradesco", "192.168.10.1"),
     BankData(BankId("2"), "Santander", "192.168.10.2"),
     BankData(BankId("3"), "Itau", "192.168.10.3"),
     BankData(BankId("4"), "Banco do Brasil", "192.168.10.4"),
     BankData(BankId("5"), "Safra", "192.168.10.5")
   )
+
+  def count()(implicit mc: MarkerContext): Int = {
+      bankList.length
+  }
 
   override def list()(implicit mc: MarkerContext): Future[Iterable[BankData]] = {
     Future {
@@ -72,6 +78,7 @@ class BankRepositoryImpl @Inject()()(implicit ec: BankExecutionContext) extends 
   def create(data: BankData)(implicit mc: MarkerContext): Future[BankId] = {
     Future {
       logger.trace(s"create: data = $data")
+      bankList = bankList.::(data)
       data.id
     }
   }

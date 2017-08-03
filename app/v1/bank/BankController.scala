@@ -9,7 +9,7 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-case class BankFormInput(name: String, location: String)
+case class BankFormInput(name: String, host: String)
 
 /**
   * Takes HTTP requests and produces JSON.
@@ -25,7 +25,7 @@ class BankController @Inject()(cc: BankControllerComponents)(implicit ec: Execut
     Form(
       mapping(
         "name" -> nonEmptyText,
-        "location" -> text
+        "host" -> text
       )(BankFormInput.apply)(BankFormInput.unapply)
     )
   }
