@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc97a557-109f-4beb-8194-f4e3b4281c13" name="Default" comment="Adding validations and getting frustrated...">
+    <list default="true" id="fc97a557-109f-4beb-8194-f4e3b4281c13" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ErrorHandler.scala" afterPath="$PROJECT_DIR$/app/ErrorHandler.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Module.scala" afterPath="$PROJECT_DIR$/app/Module.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/v1/bank/BankController.scala" afterPath="$PROJECT_DIR$/app/v1/bank/BankController.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/v1/bank/BankRepository.scala" afterPath="$PROJECT_DIR$/app/v1/bank/BankRepository.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/v1/bank/BankResourceHandler.scala" afterPath="$PROJECT_DIR$/app/v1/bank/BankResourceHandler.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.sbt" afterPath="$PROJECT_DIR$/build.sbt" />
     </list>
     <ignored path="$PROJECT_DIR$/target/streams/" />
     <ignored path="$PROJECT_DIR$/docs/target/" />
@@ -31,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BankController.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BankController.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/v1/bank/BankController.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="-595">
               <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding />
             </state>
@@ -53,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Module.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Module.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Module.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="190">
+              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding>
                 <element signature="e#1#22#0" expanded="true" />
               </folding>
@@ -365,7 +359,7 @@
       <workItem from="1501769451980" duration="370000" />
       <workItem from="1501804061172" duration="1068000" />
       <workItem from="1501805693168" duration="570000" />
-      <workItem from="1501808737091" duration="19104000" />
+      <workItem from="1501808737091" duration="19154000" />
     </task>
     <task id="LOCAL-00001" summary="Adding more IDE files (God save me...)">
       <created>1501733574390</created>
@@ -395,11 +389,18 @@
       <option name="project" value="LOCAL" />
       <updated>1501741941178</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adding validations and getting frustrated...">
+      <created>1501827948353</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1501827948353</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29471000" />
+    <option name="totallyTimeSpent" value="29521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -895,16 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Module.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="30" lean-forward="false" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/bank/BankRepository.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -917,9 +908,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/v1/bank/BankController.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="-595">
           <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Module.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding>
+            <element signature="e#1#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
