@@ -5,6 +5,7 @@ import play.api.MarkerContext
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.json._
 
+
 /**
   * DTO for displaying bank information.
   */
@@ -55,6 +56,10 @@ class BankResourceHandler @Inject()(
     bankRepository.list().map { bankDataList =>
       bankDataList.map(bankData => createBankResource(bankData))
     }
+  }
+
+  def remove(id: BankId)(implicit mc: MarkerContext): Unit = {
+    bankRepository.delete(id)
   }
 
   private def createBankResource(b: BankData): BankResource = {

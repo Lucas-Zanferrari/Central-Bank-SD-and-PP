@@ -5,15 +5,16 @@ import play.api.Logger
 import play.api.data.Form
 import play.api.libs.json.Json
 import play.api.mvc._
-
+import play.libs.ws._
 import scala.concurrent.{ExecutionContext, Future}
+
 
 case class BankFormInput(name: String, host: String)
 
 /**
   * Takes HTTP requests and produces JSON.
   */
-class BankController @Inject()(cc: BankControllerComponents)(implicit ec: ExecutionContext)
+class BankController @Inject()(ws: WSClient, cc: BankControllerComponents)(implicit ec: ExecutionContext)
     extends BankBaseController(cc) {
 
   private val logger = Logger(getClass)
@@ -61,4 +62,18 @@ class BankController @Inject()(cc: BankControllerComponents)(implicit ec: Execut
 
     form.bindFromRequest().fold(failure, success)
   }
+
+//  def updateBankList(): Unit = {
+//    bankResourceHandler.find.onComplete(tryBankResource => tryBankResource.map {
+//      iterableBankResource => iterableBankResource.foreach { bankResource => removeBankIfOffline(bankResource) } })
+//  }
+
+//  perform an http request to bankData.host and if the response code indicates an error,
+//  call bankRepository.delete(bankData.id)
+//  def removeBankIfOffline(bankResource: BankResource): Action[AnyContent] = BankAction.async { implicit request =>
+//    ws.url(bankResource.host+"/is_alive").get().map {
+//      response => if(response.status == Status.OK) { bankResourceHandler.remove(BankId(bankResource.id)) }
+//    }
+//  }
+
 }

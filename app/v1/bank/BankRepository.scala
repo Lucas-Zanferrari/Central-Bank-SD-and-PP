@@ -19,7 +19,6 @@ object BankId {
   }
 }
 
-
 class BankExecutionContext @Inject()(actorSystem: ActorSystem) extends CustomExecutionContext(actorSystem, "repository.dispatcher")
 
 /**
@@ -33,6 +32,8 @@ trait BankRepository {
   def list()(implicit mc: MarkerContext): Future[Iterable[BankData]]
 
   def get(id: BankId)(implicit mc: MarkerContext): Future[Option[BankData]]
+
+  def delete(id: BankId)(implicit mc: MarkerContext): Unit
 }
 
 /**
@@ -42,37 +43,54 @@ trait BankRepository {
   * executed in a different thread than Play's ExecutionContext, which is used for CPU bound tasks
   * such as rendering.
   */
+
 @Singleton
 class BankRepositoryImpl @Inject()()(implicit ec: BankExecutionContext) extends BankRepository {
 
   private val logger = Logger(this.getClass)
-
+  private var idCount = 0
   private var bankList: List[BankData] = List()
 
-  def nextId()(implicit mc: MarkerContext): Int = {
-    bankList.length + 1
+  override def nextId()(implicit mc: MarkerContext): Int = {
+    this.synchronized {
+      idCount += 1
+      idCount
+    }
   }
 
   override def list()(implicit mc: MarkerContext): Future[Iterable[BankData]] = {
     Future {
-      logger.trace(s"list: ")
+      logger.trace(s"list: $bankList")
       bankList
     }
   }
 
   override def get(id: BankId)(implicit mc: MarkerContext): Future[Option[BankData]] = {
     Future {
-      logger.trace(s"get: id = $id")
-      bankList.find(bank => bank.id == id)
+      val bank = bankList.find(bank => bank.id == id)
+      logger.trace(s"get: id = $bank")
+      bank
     }
   }
 
-  def create(data: BankData)(implicit mc: MarkerContext): Future[BankId] = {
+  override def create(data: BankData)(implicit mc: MarkerContext): Future[BankId] = {
     Future {
+      bankList.foreach(bank => {
+        if (bank.name == data.name || bank.host == data.host) {
+          idCount -= 1
+          throw new IllegalArgumentException("Invalid bank entry")
+        }
+      })
       logger.trace(s"create: data = $data")
       bankList = bankList.::(data)
       data.id
     }
   }
 
+  override def delete(id: BankId)(implicit mc: MarkerContext) {
+    Future {
+      logger.trace(s"delete: id = $id")
+      bankList = bankList.filter(bank => bank.id != id)
+    }
+  }
 }
