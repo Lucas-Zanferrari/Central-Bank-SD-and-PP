@@ -1,8 +1,10 @@
 
 import javax.inject._
+
 import com.google.inject.AbstractModule
 import net.codingwell.scalaguice.ScalaModule
 import play.api.{Configuration, Environment}
+import services.CentralBankJanitor
 import v1.bank._
 
 /**
@@ -15,6 +17,7 @@ class Module(environment: Environment, configuration: Configuration)
     with ScalaModule {
 
   override def configure() = {
+    bind[CentralBankJanitor].asEagerSingleton()
     bind[BankRepository].to[BankRepositoryImpl].in[Singleton]
   }
 }

@@ -58,8 +58,8 @@ class BankResourceHandler @Inject()(
     }
   }
 
-  def remove(id: BankId)(implicit mc: MarkerContext): Unit = {
-    bankRepository.delete(id)
+  def remove(id: String)(implicit mc: MarkerContext): Unit = {
+    bankRepository.delete(BankId(id))
   }
 
   private def createBankResource(b: BankData): BankResource = {

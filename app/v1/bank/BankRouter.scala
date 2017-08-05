@@ -26,6 +26,9 @@ class BankRouter @Inject()(controller: BankController) extends SimpleRouter {
 
     case GET(p"/$id") =>
       controller.show(id)
+
+    case DELETE(p"/$id") =>
+      controller.remove(id)
   }
 
 }
