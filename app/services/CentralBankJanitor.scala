@@ -22,7 +22,7 @@ class CentralBankJanitor @Inject() (ws: WSClient, bankResourceHandler: BankResou
       bankIterable => bankIterable.foreach {
         bankResource => {
           println(s"${getClass.getCanonicalName}: checking if bank #${bankResource.id} at ${bankResource.host} is online")
-          ws.url(s"$protocol${bankResource.host}/is_alive").withRequestTimeout(requestTimeOut).get().map {
+          ws.url(s"$protocol${bankResource.host}/v1/alive").withRequestTimeout(requestTimeOut).get().map {
             response =>
               if (response.status != Status.OK) {
                 println(s"${getClass.getCanonicalName}: bank #${bankResource.id} will be removed")
