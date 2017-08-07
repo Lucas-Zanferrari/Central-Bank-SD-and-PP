@@ -1,6 +1,6 @@
 GET        /                       controllers.HomeController.index
 
-->         /v1/banks               v1.bank.BankRouter
+->         /v1/bancos               v1.bank.BankRouter
 
 # Map static resources from the /public folder to the /assets URL path
 # GET        /assets/*file        controllers.Assets.at(path="/public", file)

@@ -32,7 +32,7 @@ class RequestHandler @Inject()(router: Router,
 
   private def isREST(request: RequestHeader) = {
     request.uri match {
-      case uri: String if uri.contains("bank") => true
+      case uri: String if uri.contains("banco") => true
       case _ => false
     }
   }

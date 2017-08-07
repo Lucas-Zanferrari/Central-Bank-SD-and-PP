@@ -9,7 +9,7 @@ import play.api.routing.sird._
   * Routes and URLs to the BankResource controller.
   */
 class BankRouter @Inject()(controller: BankController) extends SimpleRouter {
-  val prefix = "/v1/banks"
+  val prefix = "/v1/bancos"
 
   def link(id: BankId): String = {
     import com.netaporter.uri.dsl._
