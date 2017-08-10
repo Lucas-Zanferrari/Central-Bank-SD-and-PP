@@ -18,17 +18,18 @@ class CentralBankJanitor @Inject() (ws: WSClient, bankResourceHandler: BankResou
 
   actorSystem.scheduler.schedule(initialDelay = START_AFTER, interval = REPEAT_AFTER) {
     val result = bankResourceHandler.find.map {
-      bankIterable => bankIterable.foreach {
-        bankResource => {
-          println(s"${getClass.getCanonicalName}: checking if bank #${bankResource.id} at ${bankResource.host} is online")
-          ws.url(s"$PROTOCOL${bankResource.host}/v1/alive").withRequestTimeout(REQUEST_TIMEOUT).get().map {
-            response =>
-              if (response.status != Status.OK) {
-                Logger.info(s"${getClass.getCanonicalName}: bank #${bankResource.id} will be removed")
-                bankResourceHandler.remove(bankResource.id)
-              }
-              else
-                Logger.info(s"${getClass.getCanonicalName}: bank #${bankResource.id} is still online")
+      bankIterable => bankIterable.foreach { bankResource => {
+        println(s"${getClass.getCanonicalName}: checking if bank #${bankResource.id} at ${bankResource.host} is online")
+        ws.url(s"$PROTOCOL${bankResource.host}/v1/alive")
+          .withRequestTimeout(REQUEST_TIMEOUT)
+          .get()
+          .map { response =>
+            if (response.status != Status.OK) {
+              Logger.info(s"${getClass.getCanonicalName}: bank #${bankResource.id} will be removed")
+              bankResourceHandler.remove(bankResource.id)
+            }
+            else
+              Logger.info(s"${getClass.getCanonicalName}: bank #${bankResource.id} is still online")
           }
           .recover {
             case e: TimeoutException => {
@@ -43,7 +44,6 @@ class CentralBankJanitor @Inject() (ws: WSClient, bankResourceHandler: BankResou
         }
       }
     }
-
     Await.result(result, Duration.Inf)
   }
 
